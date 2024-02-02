@@ -16,10 +16,8 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.pragatisawaliya }}
-          password: ${{ secrets.dckr_pat_bmxDxp5gVPKMnXZ0EpghWREVj04 }}
+        run: |
+          echo "${{ secrets.dckr_pat_bmxDxp5gVPKMnXZ0EpghWREVj04 }}" | docker login --username "${{ secrets.pragatisawaliya }}" --password-stdin
 
       - name: Build and push
         uses: docker/build-push-action@v5
