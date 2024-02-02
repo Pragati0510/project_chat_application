@@ -19,8 +19,8 @@ jobs:
         with:
           node-version: '20' # Adjust the version as needed
       
-      - name: Navigate to client directory
-        run: cd client && npm install
+      - name: Install dependencies
+        run: npm install
 
       - name: Build client project
         run: npm run build
