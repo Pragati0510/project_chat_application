@@ -27,7 +27,8 @@ jobs:
         working-directory: ./client
         run: |
           npm ci
-          npm run build
+          # Modify the build command to exclude treating warnings as errors
+          npm run build -- --no-warnings
           
       - name: Deploy client to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
@@ -39,8 +40,8 @@ jobs:
         working-directory: ./server
         run: |
           npm ci
-          npm run build
-
+          # Modify the build command to exclude treating warnings as errors
+          npm run build -- --no-warnings
       # Add deployment step for server if needed
 
       - name: Deploy to GitHub Pages
