@@ -18,12 +18,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20' # Adjust the version as needed
-      
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.0
      
       - name: Install dependencies for client
         run: npm install
