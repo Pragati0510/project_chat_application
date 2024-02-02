@@ -1,12 +1,13 @@
 name: CI/CD for React App
+
 on:
   push:
     branches: [master]
   workflow_dispatch:
-  
+
 permissions:
   contents: write
-  
+
 jobs:
   builds_and_deploy:
     runs-on: ubuntu-latest
@@ -23,14 +24,28 @@ jobs:
         run: npm cache clean --force
         
       - name: Install dependencies for client
-        run: npm install
         working-directory: ./client
-        
-      - name: Build client project
-        run: npm run build
-    
-      - name: Deploy to GitHub Pages
+        run: |
+          npm ci
+          npm run build
+          
+      - name: Deploy client to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
           folder: client/build
+
+      - name: Install dependencies for server
+        working-directory: ./server
+        run: |
+          npm ci
+          npm run build
+
+      # Add deployment step for server if needed
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: server/build
+          
