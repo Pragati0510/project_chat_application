@@ -11,9 +11,6 @@ jobs:
   builds_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Print current directory
-        run: pwd
-
       - name: Checkout repository
         uses: actions/checkout@v3
         
@@ -21,7 +18,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20' # Adjust the version as needed
-
+      - name: Print current directory
+        run: pwd
       - name: Navigate to client directory
         run: cd client
 
