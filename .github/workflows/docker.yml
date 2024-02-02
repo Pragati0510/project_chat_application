@@ -26,10 +26,21 @@ jobs:
 
       - name: Install project dependencies
         run: npm install 
+        working-directory: ./client
 
       - name: Build client
         working-directory: ./client
         run: npm run build -- --no-warnings
+      
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: ./server/build
+          
+      - name: Install project dependencies
+        run: npm install 
+        working-directory: ./server
 
       - name: Build server
         working-directory: ./server
@@ -39,4 +50,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
-          folder: ./client/build
+          folder: ./server/build
