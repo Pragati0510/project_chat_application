@@ -20,7 +20,7 @@ jobs:
           node-version: '20' # Adjust the version as needed
           
       - name: Clean cache
-        run: npm cache clean
+        run: npm cache clean --force
         
       - name: Install dependencies for client
         run: npm install
