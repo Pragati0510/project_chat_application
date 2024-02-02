@@ -1,37 +1,29 @@
-name: Docker Build and Push
+name: ci
 
 on:
   push:
     branches:
-      - master
+      - 'main'
 
 jobs:
-  build-and-push:
-    runs-on: windows-latest
+  docker:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Upgrade Node.js to v20
-        uses: actions/setup-node@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          node-version: '20'
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.pragatisawliya }}
+          username: ${{ secrets.pragatisawaliya }}
           password: ${{ secrets.dckr_pat_IFhG55AECVN-0amKRaNEj30l1Lo }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Build Docker image
-        run: |
-          docker buildx create --name mybuilder
-          docker buildx use mybuilder
-          docker buildx inspect --bootstrap
-          docker buildx build --platform linux/amd64,linux/arm64 -t pragatisawaliya/chat_app:latest .
-
-      - name: Push Docker image
-        run: docker push pragatisawaliya/chat_app:latest
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: user/app:latest
