@@ -18,8 +18,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20' # Adjust the version as needed
+
+      - name: Debug
+        run: echo "Debugging information"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Debug
+        run: echo "End of debugging"
+
       - name: Print current directory
         run: pwd
+      
       - name: Navigate to client directory
         run: cd client
 
