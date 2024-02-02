@@ -21,13 +21,21 @@ jobs:
       
       - name: Install dependencies
         run: npm install
+        
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+     
+      - name: Install dependencies for client
+        run: npm install
+        working-directory: ./client
 
-      - name: Build client project
+      - name: Install dependencies for server
+        run: npm install
+        working-directory: ./server
+
+      - name: Build Projects
         run: npm run build
-
-      - name: Navigate back to project root directory
-        run: cd ..
-
+      
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
