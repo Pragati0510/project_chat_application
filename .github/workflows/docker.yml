@@ -1,5 +1,4 @@
 name: CI/CD for React App
-
 on:
   push:
     branches: [main]
