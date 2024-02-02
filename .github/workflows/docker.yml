@@ -18,18 +18,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20' # Adjust the version as needed
-     
-      - name: Install dependencies for client
-        run: npm install
-        working-directory: ./client
 
       - name: Install dependencies for server
         run: npm install
         working-directory: ./server
-
-      - name: Build Projects
-        run: npm run build
-        working-directory: ./client
         
       - name: Build Projects
         run: npm run build
@@ -39,4 +31,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
-          folder: client/build
+          folder: server/build
